@@ -24,3 +24,7 @@ services:
         NAMESPACE_BASE: http://localhost/ns/
     ports:
       - "8081:80"
+  lode:
+    build: ./lode
+    ports:
+      - "9090:8080"

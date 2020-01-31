@@ -1,14 +1,10 @@
-FROM openjdk:8
-RUN apt-get update && apt-get -y install maven unzip
-ADD https://github.com/essepuntato/LODE/archive/master.zip /lode/
+FROM  maven:3.6.3-jdk-8
 
-RUN ls /lode
+RUN cd /opt && \
+	git clone https://github.com/stlab-istc-cnr/LODE.git
 
-EXPOSE 9090
+WORKDIR /opt/LODE
 
-RUN cd /lode \
-		&& unzip master.zip \
-		&& cd LODE-master
+EXPOSE 8080
 
-WORKDIR /lode/LODE-master
-CMD ["mvn", "clean", "jetty:run"]
+ENTRYPOINT ["mvn", "clean", "jetty:run"]

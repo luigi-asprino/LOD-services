@@ -3,6 +3,7 @@ A docker-compose that builds a number of common services for publishing Linked D
 
 
 ### TODO
-* Integrate LODE
+* ~~Integrate LODE~~
 * Integrate NGINX proxy rules
 * Integrate YASGUI
+* Integrate Blazegraph
