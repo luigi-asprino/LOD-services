@@ -6,4 +6,4 @@ A docker-compose that builds a number of common services for publishing Linked D
 * ~~Integrate LODE~~
 * ~~Integrate NGINX proxy rules~~
 * ~~Integrate YASGUI~~
-* ~~Integrate Blazegraph~~
+* Integrate Blazegraph
