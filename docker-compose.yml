@@ -4,27 +4,21 @@ services:
     build:
       context: ./lodview
       args:
-        LODLIVE_URL: http://localhost:8081/app_en.html
-        SPARQL_ENDPOINT_URL: http://virtuoso:8890/sparql/
+        LODLIVE_EXTERNAL_URL: http://localhost/app_en.html
+        SPARQL_ENDPOINT_EXTERNAL_URL: http://nginx/sparql/
         SPARQL_ENDPOINT_TYPE: virtuoso
         NAMESPACE: http://localhost/ns/
-    ports:
-      - "8080:8080"
   virtuoso:
     build: ./virtuoso
     volumes:
       - ./data/virtuoso:/data
-    ports:
-      - "8890:8890"
-  lodlive:
-    build:
-      context: ./lodlive
-      args:
-        SPARQL_ENDPOINT_URL: http://localhost:8890/sparql/
-        NAMESPACE_BASE: http://localhost/ns/
-    ports:
-      - "8081:80"
   lode:
     build: ./lode
+  nginx:
+    build:
+      context: ./nginx
+      args:
+        EXTERNAL_HOSTNAME: localhost
+        NAMESPACE_BASE: http://localhost/ns/
     ports:
-      - "9090:8080"
+      - "80:80"

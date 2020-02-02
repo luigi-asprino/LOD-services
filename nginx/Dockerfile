@@ -1,7 +1,15 @@
-FROM nginx
+FROM nginx:1.17.7
 
+ARG EXTERNAL_HOSTNAME
 ARG NAMESPACE_BASE
-ARG SPARQL_ENDPOINT_URL
+
+COPY index_template.html /
+
+RUN cat /index_template.html | \
+    sed -e "s,EXTERNAL_HOSTNAME,${EXTERNAL_HOSTNAME},g"  \
+    > /usr/share/nginx/html/index.html
+
+COPY nginx.conf /etc/nginx/nginx.conf
 
 RUN apt-get update && \
 	apt-get install --no-install-recommends --no-install-suggests -y git && \
@@ -10,11 +18,10 @@ RUN apt-get update && \
 	git clone https://github.com/stlab-istc-cnr/LodLive.git && \
 	mv LodLive/* /usr/share/nginx/html/
 
-#COPY lodlive.profile.js /usr/share/nginx/html/js/
-
 COPY lodlive.profile_template.js /
 
 RUN cat /lodlive.profile_template.js | \
     sed -e "s,NAMESPACE_BASE,${NAMESPACE_BASE},g" | \
-    sed -e "s,SPARQL_ENDPOINT_URL,${SPARQL_ENDPOINT_URL},g"  \
+    sed -e "s,EXTERNAL_HOSTNAME,${EXTERNAL_HOSTNAME},g"  \
     > /usr/share/nginx/html/js/lodlive.profile.js
+

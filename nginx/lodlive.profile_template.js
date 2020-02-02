@@ -19,7 +19,7 @@ $.jStorage
 								inverse : 'SELECT DISTINCT * WHERE {?object ?property <{URI}>} LIMIT 100',
 								inverseSameAs : 'SELECT DISTINCT * WHERE {?object <http://www.w3.org/2002/07/owl#sameAs> <{URI}>}'
 							},
-							endpoint : 'SPARQL_ENDPOINT_URL',
+							endpoint : 'http://EXTERNAL_HOSTNAME/sparql',
 							examples : []
 						}
 

@@ -1,9 +1,9 @@
 FROM maven:3.5.0-jdk-8 as lodview
 
-ARG SPARQL_ENDPOINT_URL
+ARG SPARQL_ENDPOINT_EXTERNAL_URL
 ARG SPARQL_ENDPOINT_TYPE
 ARG NAMESPACE
-ARG LODLIVE_URL
+ARG LODLIVE_EXTERNAL_URL
 
 #RUN echo "NAMESPACE arg: ${NAMESPACE}" && \
 #    echo "LODLIVE_URL arg ${LODLIVE_URL}" && \
@@ -18,8 +18,8 @@ RUN git clone https://github.com/stlab-istc-cnr/LodView.git
 COPY conf_template.ttl /
 
 RUN cat /conf_template.ttl | \
-    sed -e "s,LODLIVE_URL,${LODLIVE_URL},g" | \
-    sed -e "s,SPARQL_ENDPOINT_URL,${SPARQL_ENDPOINT_URL},g" | \
+    sed -e "s,LODLIVE_URL,${LODLIVE_EXTERNAL_URL},g" | \
+    sed -e "s,SPARQL_ENDPOINT_URL,${SPARQL_ENDPOINT_EXTERNAL_URL},g" | \
     sed -e "s,SPARQL_ENDPOINT_TYPE,${SPARQL_ENDPOINT_TYPE},g" | \
     sed -e "s,NAMESPACE,${NAMESPACE},g" \
     > /LodView/src/main/webapp/WEB-INF/conf.ttl
