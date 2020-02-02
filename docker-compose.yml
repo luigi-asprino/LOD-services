@@ -4,7 +4,7 @@ services:
     build:
       context: ./lodview
       args:
-        LODLIVE_EXTERNAL_URL: http://localhost/app_en.html
+        LODLIVE_EXTERNAL_URL: http://localhost/lodlive/app_en.html
         SPARQL_ENDPOINT_EXTERNAL_URL: http://nginx/sparql/
         SPARQL_ENDPOINT_TYPE: virtuoso
         NAMESPACE: http://localhost/ns/
